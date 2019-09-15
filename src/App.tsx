@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { Link,Switch,Route,BrowserRouter as Router, Redirect } from 'react-router-dom';
+import HomePage from './components/Home-Page';
+import AboutPage from './components/About-Page';
+import AppNavbarPage from './shared/AppNavbar';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface Istate{
+
 }
 
-export default App;
+export default class App extends React.Component<Istate>{
+
+    render(){
+       return(
+         <Router>
+            <Switch>
+            <div className="App">
+              <AppNavbarPage />
+               <Route exact path="/home" component={HomePage} />
+               <Route exact path="/about" component={AboutPage} />
+               <Route exact path="/" render={() => (<Redirect to="/home" />)} />
+            </div>
+            </Switch>
+          </Router>
+      )
+    }
+}
